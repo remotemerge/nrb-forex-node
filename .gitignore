@@ -1,0 +1,17 @@
+### Vendor directories
+/.yarn/
+/node_modules/
+/vendor/
+
+### Build directories
+/build/
+/bundle/
+/dist/
+
+### Misc
+*.cache
+*.key
+*.log
+*.zip
+.env
+yarn.lock
