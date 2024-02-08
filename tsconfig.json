@@ -17,10 +17,8 @@
     ]
   },
   "include": [
-    "src/types/index.ts",
-    "src/current.ts",
-    "src/daily.ts",
-    "src/range.ts",
-    "makers/package.ts"
+    "src/types/*.d.ts",
+    "src/*.ts",
+    "makers/*.ts"
   ]
 }
