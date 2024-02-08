@@ -25,8 +25,8 @@
   },
   "type": "module",
   "scripts": {
-    "lint": "eslint src",
-    "lint:fix": "eslint --fix src",
+    "lint": "eslint --ext .ts src",
+    "lint:fix": "eslint --ext .ts --fix src",
     "format": "prettier --write **/*.ts **/**/*.ts",
     "build": "vite build && tsx ./makers/package.ts"
   },
