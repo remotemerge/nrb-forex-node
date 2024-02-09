@@ -4,11 +4,13 @@ import { DateRate, LiveRate, StandardRate, StandardRates } from './types';
 
 /**
  * @description Fetches live rates from the API
- * @param currency
+ * @param iso3
  */
-const liveRate = async (
-  currency = '',
-): Promise<StandardRate | StandardRates> => {
+const liveRate = async ({
+  iso3 = '',
+}: {
+  iso3: string;
+}): Promise<StandardRate | StandardRates> => {
   const res = await fetch(`${apiUrl}/app-rate`);
   if (!res.ok) {
     throw new Error(apiError);
@@ -24,9 +26,9 @@ const liveRate = async (
   }));
 
   // Filtering rates based on the provided currency
-  if (currency) {
+  if (iso3) {
     const [rate] = rates.filter(
-      (rate) => rate.iso3.toUpperCase() === currency.toUpperCase(),
+      (rate) => rate.iso3.toUpperCase() === iso3.toUpperCase(),
     );
     return { date, published_on, modified_on, rate };
   }
@@ -35,13 +37,16 @@ const liveRate = async (
 
 /**
  * @description Fetches rates for a specific date from the API
- * @param inputDate
- * @param currency
+ * @param date
+ * @param iso3
  */
-const dayRate = async (
-  inputDate: string,
-  currency = '',
-): Promise<StandardRate | StandardRates> => {
+const dayRate = async ({
+  date: inputDate,
+  iso3 = '',
+}: {
+  date: string;
+  iso3: string;
+}): Promise<StandardRate | StandardRates> => {
   const res = await fetch(`${apiUrl}/rate?date=${inputDate}`);
   if (!res.ok) {
     throw new Error(apiError);
@@ -58,9 +63,9 @@ const dayRate = async (
   }));
 
   // Filtering rates based on the provided currency
-  if (currency) {
+  if (iso3) {
     const [rate] = data.filter(
-      (rate) => rate.iso3.toUpperCase() === currency.toUpperCase(),
+      (rate) => rate.iso3.toUpperCase() === iso3.toUpperCase(),
     );
     return { date, published_on, modified_on, rate };
   }
