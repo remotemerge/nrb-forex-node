@@ -4,21 +4,25 @@
     "module": "ESNext",
     "moduleResolution": "Node",
     "noEmit": true,
-    "declaration": true,
-    "emitDeclarationOnly": true,
-    "declarationDir": "./dist/types",
-    "removeComments": true,
     "strict": true,
     "noImplicitAny": true,
+    "isolatedModules": true,
     "skipLibCheck": true,
+    "types": [
+      "vite/client"
+    ],
     "typeRoots": [
-      "node_modules/@types",
-      "src/types"
+      "node_modules/@types"
     ]
   },
   "include": [
-    "src/types/*.d.ts",
-    "src/*.ts",
-    "makers/*.ts"
+    "*.ts",
+    "makers/*.ts",
+    "src/**/*.ts"
+  ],
+  "exclude": [
+    "dist",
+    "node_modules",
+    "test"
   ]
 }
