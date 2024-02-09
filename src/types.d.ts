@@ -25,19 +25,20 @@ interface BuySellInfo {
   sell: number;
 }
 
-export interface DateRate extends DateInfo {
+export interface DateRate {
   data: {
-    payload: {
+    payload: DateInfo & {
       rates: ({ currency: CurrencyInfo } & BuySellInfo)[];
     };
   };
 }
 
-export interface DateRangeRate extends DateInfo {
+export interface DateRangeRate {
   data: {
-    payload: {
-      rates: ({ currency: CurrencyInfo } & BuySellInfo)[];
-    }[];
+    payload: DateInfo &
+      {
+        rates: ({ currency: CurrencyInfo } & BuySellInfo)[];
+      }[];
   };
 }
 
