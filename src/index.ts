@@ -11,16 +11,16 @@ const liveRate = async (
   }
 
   // Load the data from the response
-  const data = <StandardRate[]>await res.json();
+  const rateData = <StandardRate[]>await res.json();
 
   // Filter the data based on the iso3 parameter
   if (inputIso3) {
-    const [match] = data.filter(
+    const [match] = rateData.filter(
       (rate) => rate.iso3.toUpperCase() === inputIso3.toUpperCase(),
     );
     return match;
   }
-  return data;
+  return rateData;
 };
 
 const dayRate = async (
@@ -33,10 +33,10 @@ const dayRate = async (
   }
 
   // Load the data from the response
-  const dayRes = <DateRate>await res.json();
+  const rateData = <DateRate>await res.json();
 
   // Extract date data
-  const { date, published_on, modified_on, rates } = dayRes.data.payload;
+  const { date, published_on, modified_on, rates } = rateData.data.payload;
 
   // Merge the date with rates
   const data = rates.map(({ buy, sell, currency }) => ({
