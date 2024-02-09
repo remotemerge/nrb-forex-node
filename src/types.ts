@@ -1,13 +1,3 @@
-/// <reference types="vite/client" />
-
-interface ImportMetaEnv {
-  readonly VITE_NRB_API_URL: string;
-}
-
-interface ImportMeta {
-  readonly env: ImportMetaEnv;
-}
-
 interface ApiCurrencyInfo {
   iso3: string;
   name: string;
