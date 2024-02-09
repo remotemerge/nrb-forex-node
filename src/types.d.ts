@@ -8,46 +8,65 @@ interface ImportMeta {
   readonly env: ImportMetaEnv;
 }
 
-interface CurrencyInfo {
+interface ApiCurrencyInfo {
   iso3: string;
   name: string;
   unit: number;
 }
 
-interface DateInfo {
+interface ApiDateInfo {
   date: string;
   published_on: string;
   modified_on: string;
 }
 
-interface BuySellInfo {
+interface ApiBuySellInfo {
   buy: number;
   sell: number;
 }
 
-export type LiveRate = DateInfo & CurrencyInfo & BuySellInfo;
+export interface ApiLiveRate
+  extends ApiDateInfo,
+    ApiCurrencyInfo,
+    ApiBuySellInfo {}
 
-export interface DateRate {
+export interface ApiDateRate {
   data: {
-    payload: DateInfo & {
-      rates: ({ currency: CurrencyInfo } & BuySellInfo)[];
+    payload: ApiDateInfo & {
+      rates: Array<{ currency: ApiCurrencyInfo } & ApiBuySellInfo>;
     };
   };
 }
 
-export interface DateRangeRate {
+export interface ApiDateRangeRate {
   data: {
-    payload: DateInfo &
+    payload: ApiDateInfo &
       {
-        rates: ({ currency: CurrencyInfo } & BuySellInfo)[];
+        rates: Array<{ currency: ApiCurrencyInfo } & ApiBuySellInfo>;
       }[];
   };
+  pagination: { page: number; pages: number };
+}
+
+// Range query parameters
+export interface RangeQuery {
+  from: string;
+  to: string;
+  page: number;
+  perPage: number;
 }
 
 // Response for single currency filter
-export type StandardRate = DateInfo & { rate?: CurrencyInfo & BuySellInfo };
+export type StandardRate = ApiDateInfo & {
+  rate?: { currency: ApiCurrencyInfo } & ApiBuySellInfo;
+  rates?: Array<{ currency: ApiCurrencyInfo } & ApiBuySellInfo>;
+};
 
-// Response for all currency
-export type StandardRates = DateInfo & {
-  rates?: (CurrencyInfo & BuySellInfo)[];
+// Response for all currencies
+export type DateRangeRate = {
+  payload: ApiDateInfo &
+    {
+      rates: Array<{ currency: ApiCurrencyInfo } & ApiBuySellInfo>;
+    }[];
+  pagination: { page: number; total: number };
 };
