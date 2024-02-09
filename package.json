@@ -7,6 +7,7 @@
   "private": false,
   "author": {
     "name": "Madan Sapkota",
+    "role": "Maintainer",
     "email": "contact+github@madansapkota.com",
     "url": "https://madansapkota.com"
   },
@@ -28,6 +29,8 @@
     "lint": "eslint --ext .ts src",
     "lint:fix": "eslint --ext .ts --fix src",
     "format": "prettier --write **/*.ts **/**/*.ts",
+    "dev": "vite",
+    "preview": "vite preview",
     "build": "vite build && tsx ./makers/package.ts"
   },
   "dependencies": {
@@ -38,6 +41,7 @@
     "@typescript-eslint/parser": "^6.21.0",
     "eslint": "^8.56.0",
     "eslint-plugin-prettier": "^5.1.3",
+    "tsx": "^4.7.0",
     "typescript": "^5.3.3",
     "vite": "^5.1.0"
   },
