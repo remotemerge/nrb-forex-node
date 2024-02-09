@@ -1,32 +1,37 @@
 import { apiUrl } from './helper/config';
 import { apiError } from './helper/message';
-import { DateRate, StandardRate } from './types';
+import { DateRate, LiveRate, StandardRate, StandardRates } from './types';
 
 const liveRate = async (
-  inputIso3 = '',
-): Promise<StandardRate | StandardRate[]> => {
+  currency = '',
+): Promise<StandardRate | StandardRates> => {
   const res = await fetch(`${apiUrl}/app-rate`);
   if (!res.ok) {
     throw new Error(apiError);
   }
 
   // Load the data from the response
-  const rateData = <StandardRate[]>await res.json();
+  const rateData = <LiveRate[]>await res.json();
+  const [{ date, published_on, modified_on }] = rateData;
+
+  const rates = rateData.map(({ iso3, name, unit, buy, sell }) => ({
+    ...{ iso3, name, unit, buy: +buy, sell: +sell },
+  }));
 
   // Filter the data based on the iso3 parameter
-  if (inputIso3) {
-    const [match] = rateData.filter(
-      (rate) => rate.iso3.toUpperCase() === inputIso3.toUpperCase(),
+  if (currency) {
+    const [rate] = rates.filter(
+      (rate) => rate.iso3.toUpperCase() === currency.toUpperCase(),
     );
-    return match;
+    return { date, published_on, modified_on, rate };
   }
-  return rateData;
+  return { date, published_on, modified_on, rates };
 };
 
 const dayRate = async (
   inputDate: string,
-  inputIso3 = '',
-): Promise<StandardRate | StandardRate[]> => {
+  currency = '',
+): Promise<StandardRate | StandardRates> => {
   const res = await fetch(`${apiUrl}/rate?date=${inputDate}`);
   if (!res.ok) {
     throw new Error(apiError);
@@ -42,17 +47,16 @@ const dayRate = async (
   const data = rates.map(({ buy, sell, currency }) => ({
     ...currency,
     ...{ buy: +buy, sell: +sell },
-    ...{ date, published_on, modified_on },
   }));
 
   // Filter the data based on the iso3 parameter
-  if (inputIso3) {
-    const [match] = data.filter(
-      (rate) => rate.iso3.toUpperCase() === inputIso3.toUpperCase(),
+  if (currency) {
+    const [rate] = data.filter(
+      (rate) => rate.iso3.toUpperCase() === currency.toUpperCase(),
     );
-    return match;
+    return { date, published_on, modified_on, rate };
   }
-  return data;
+  return { date, published_on, modified_on, rates: data };
 };
 
 export { liveRate, dayRate };
