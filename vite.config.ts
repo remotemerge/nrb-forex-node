@@ -5,7 +5,7 @@ import dts from 'vite-plugin-dts';
 export default defineConfig(({ mode }) => {
   const env = loadEnv(mode, process.cwd(), 'VITE_');
   return {
-    plugins: [dts({ rollupTypes: true })],
+    plugins: [dts({ include: 'src/*.ts' })],
     build: {
       minify: false,
       lib: {
