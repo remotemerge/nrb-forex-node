@@ -1,16 +1,18 @@
 import * as process from 'process';
 import { defineConfig, loadEnv } from 'vite';
+import dts from 'vite-plugin-dts';
 
 export default defineConfig(({ mode }) => {
   const env = loadEnv(mode, process.cwd(), 'VITE_');
   return {
+    plugins: [dts({ rollupTypes: true })],
     build: {
-      minify: true,
+      minify: false,
       lib: {
         entry: 'src/index.ts',
         formats: ['cjs', 'es'],
-        fileName: (format) => `forex.${format === 'es' ? 'esm' : format}.js`,
       },
+      sourcemap: true,
     },
     server: {
       proxy: {
