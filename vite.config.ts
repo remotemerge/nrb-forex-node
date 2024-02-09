@@ -1,8 +1,8 @@
 import * as process from 'process';
 import { defineConfig, loadEnv } from 'vite';
 
-export default defineConfig(() => {
-  const env = loadEnv('nrb', process.cwd(), 'VITE_');
+export default defineConfig(({ mode }) => {
+  const env = loadEnv(mode, process.cwd(), 'VITE_');
   return {
     build: {
       minify: true,
