@@ -1,5 +1,4 @@
-import { apiUrl } from './helper/config';
-import { apiError } from './helper/message';
+import { apiUrl } from './config';
 import {
   ApiDateRangeRate,
   ApiDateRate,
@@ -8,6 +7,9 @@ import {
   RangeQuery,
   StandardRate,
 } from './types';
+
+// Set generic error message
+const apiError = 'The NRB API is not available or the request failed.';
 
 /**
  * @description Fetches live rates from the API
