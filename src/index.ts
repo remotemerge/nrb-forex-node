@@ -2,6 +2,10 @@ import { apiUrl } from './helper/config';
 import { apiError } from './helper/message';
 import { DateRate, LiveRate, StandardRate, StandardRates } from './types';
 
+/**
+ * @description Fetches live rates from the API
+ * @param currency
+ */
 const liveRate = async (
   currency = '',
 ): Promise<StandardRate | StandardRates> => {
@@ -10,15 +14,16 @@ const liveRate = async (
     throw new Error(apiError);
   }
 
-  // Load the data from the response
+  // Parsing the rate data from the response
   const rateData = <LiveRate[]>await res.json();
   const [{ date, published_on, modified_on }] = rateData;
 
+  // Formatting rates data
   const rates = rateData.map(({ iso3, name, unit, buy, sell }) => ({
     ...{ iso3, name, unit, buy: +buy, sell: +sell },
   }));
 
-  // Filter the data based on the iso3 parameter
+  // Filtering rates based on the provided currency
   if (currency) {
     const [rate] = rates.filter(
       (rate) => rate.iso3.toUpperCase() === currency.toUpperCase(),
@@ -28,6 +33,11 @@ const liveRate = async (
   return { date, published_on, modified_on, rates };
 };
 
+/**
+ * @description Fetches rates for a specific date from the API
+ * @param inputDate
+ * @param currency
+ */
 const dayRate = async (
   inputDate: string,
   currency = '',
@@ -37,19 +47,17 @@ const dayRate = async (
     throw new Error(apiError);
   }
 
-  // Load the data from the response
+  // Parsing the rate data from the response
   const rateData = <DateRate>await res.json();
-
-  // Extract date data
   const { date, published_on, modified_on, rates } = rateData.data.payload;
 
-  // Merge the date with rates
+  // Extracting and merging the rate data
   const data = rates.map(({ buy, sell, currency }) => ({
     ...currency,
     ...{ buy: +buy, sell: +sell },
   }));
 
-  // Filter the data based on the iso3 parameter
+  // Filtering rates based on the provided currency
   if (currency) {
     const [rate] = data.filter(
       (rate) => rate.iso3.toUpperCase() === currency.toUpperCase(),
