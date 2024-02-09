@@ -47,9 +47,56 @@ For more comprehensive analysis or reporting purposes, you might need to gather 
 ```javascript
 import { dateRangeRate } from '@sapkotamadan/nrb-forex';
 
-dateRangeRate({ from: '2024-02-03', to: '2024-02-09', page: 1, perPage: 10 }).then((data) => {
+dateRangeRate({ from: '2024-02-02', to: '2024-02-09', page: 1, perPage: 5 }).then((data) => {
   console.log(data);
 }).catch((error) => {
   console.log(error);
 });
+```
+
+The sample response for the `dateRangeRate()` function is as follows:
+
+```json
+{
+  "payload": [
+    {
+      "date": "2024-02-02",
+      "published_on": "2024-02-02 00:00:13",
+      "modified_on": "2024-02-01 17:24:05",
+      "rates": [
+        {
+          "currency": {
+            "iso3": "USD",
+            "name": "U.S. Dollar",
+            "unit": 1
+          },
+          "buy": "132.45",
+          "sell": "133.05"
+        },
+        "..."
+      ]
+    },
+    {
+      "date": "2024-02-09",
+      "published_on": "2024-02-09 00:00:11",
+      "modified_on": "2024-02-08 17:26:11",
+      "rates": [
+        {
+          "currency": {
+            "iso3": "USD",
+            "name": "U.S. Dollar",
+            "unit": 1
+          },
+          "buy": "132.44",
+          "sell": "133.04"
+        },
+        "..."
+      ]
+    }
+  ],
+  "pagination": {
+    "page": 1,
+    "total": 2
+  }
+}
 ```
