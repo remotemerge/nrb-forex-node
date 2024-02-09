@@ -5,14 +5,11 @@ export default defineConfig(() => {
   const env = loadEnv('nrb', process.cwd(), 'VITE_');
   return {
     build: {
-      minify: false,
+      minify: true,
       lib: {
         entry: 'src/index.ts',
         formats: ['cjs', 'es'],
         fileName: (format) => `forex.${format === 'es' ? 'esm' : format}.js`,
-      },
-      rollupOptions: {
-        external: ['axios'],
       },
     },
     server: {
