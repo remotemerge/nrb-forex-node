@@ -2,7 +2,7 @@ import { apiUrl } from './helper/config';
 import { apiError } from './helper/message';
 import { StandardRate } from './types';
 
-const live = async (iso3 = ''): Promise<StandardRate | StandardRate[]> => {
+const liveRate = async (iso3 = ''): Promise<StandardRate | StandardRate[]> => {
   const res = await fetch(`${apiUrl}/app-rate`);
   if (!res.ok) {
     throw new Error(apiError);
@@ -20,4 +20,4 @@ const live = async (iso3 = ''): Promise<StandardRate | StandardRate[]> => {
   return data;
 };
 
-export { live };
+export { liveRate };
