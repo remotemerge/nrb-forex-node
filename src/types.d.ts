@@ -25,6 +25,8 @@ interface BuySellInfo {
   sell: number;
 }
 
+export type LiveRate = DateInfo & CurrencyInfo & BuySellInfo;
+
 export interface DateRate {
   data: {
     payload: DateInfo & {
@@ -42,4 +44,10 @@ export interface DateRangeRate {
   };
 }
 
-export type StandardRate = DateInfo & CurrencyInfo & BuySellInfo;
+// Response for single currency filter
+export type StandardRate = DateInfo & { rate?: CurrencyInfo & BuySellInfo };
+
+// Response for all currency
+export type StandardRates = DateInfo & {
+  rates?: (CurrencyInfo & BuySellInfo)[];
+};
