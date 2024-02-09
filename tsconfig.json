@@ -17,7 +17,7 @@
   },
   "include": [
     "*.ts",
-    "makers/*.ts",
+    "maker/*.ts",
     "src/**/*.ts"
   ],
   "exclude": [
