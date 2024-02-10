@@ -55,7 +55,7 @@ Optionally, you can also specify the currency code to retrieve the exchange rate
 ```javascript
 import { liveRate } from '@sapkotamadan/nrb-forex';
 
-liveRate({ currency: 'EUR' }).then((data) => {
+liveRate({ iso3: 'EUR' }).then((data) => {
   console.log(data);
 }).catch((error) => {
   console.log(error);
@@ -124,7 +124,7 @@ Optionally, you can also specify the currency code to retrieve the exchange rate
 ```javascript
 import { dateRate } from '@sapkotamadan/nrb-forex';
 
-dateRate({ date: '2024-02-10', currency: 'CHF' }).then((data) => {
+dateRate({ date: '2024-02-10', iso3: 'CHF' }).then((data) => {
   console.log(data);
 }).catch((error) => {
   console.log(error);
