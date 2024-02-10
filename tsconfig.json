@@ -9,7 +9,8 @@
     "isolatedModules": true,
     "skipLibCheck": true,
     "types": [
-      "vite/client"
+      "vite/client",
+      "dist/index.d.ts",
     ],
     "typeRoots": [
       "node_modules/@types"
