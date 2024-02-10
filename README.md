@@ -213,3 +213,7 @@ The sample response for the `dateRangeRate` function is as follows:
   }
 }
 ```
+<hr />
+
+### Legal Disclaimer
+This package retrieves exchange rates from the Nepal Rastra Bank (NRB) and presents them as provided. Please note that exchange rates are subject to frequent changes without prior notice. The package does not warrant the accuracy, completeness, or reliability of the data. Users are strongly advised to seek guidance from a qualified financial advisor or conduct comprehensive research before relying on the exchange rates provided by this package for any financial decisions. The package author and contributors disclaim any liability for any loss or damage arising from the use of this package or the data it provides.
