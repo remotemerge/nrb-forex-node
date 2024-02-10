@@ -1,4 +1,4 @@
-# <img src="./assets/logo.png" width="28" height="28"> NRB Forex API
+# NRB Forex API
 
 [![Package](https://img.shields.io/npm/v/@sapkotamadan/nrb-forex?logo=npm)](https://www.npmjs.com/package/@sapkotamadan/nrb-forex)
 ![Build](https://img.shields.io/github/actions/workflow/status/remotemerge/nrb-forex-node/production.yml?logo=github)
@@ -6,6 +6,8 @@
 ![License](https://img.shields.io/npm/l/@sapkotamadan/nrb-forex)
 
 The **NRB Forex API** package provides a simple and intuitive interface for accessing exchange rates published by the Nepal Rastra Bank (NRB). It offers a range of functions to retrieve live exchange rates, historical exchange rates for a specific date, and exchange rates within a custom date range. This package is designed to facilitate seamless integration of NRB exchange rates into various financial applications, such as accounting software, e-commerce platforms, and financial dashboards.
+
+<hr />
 
 ### Installation
 
