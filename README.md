@@ -12,6 +12,8 @@ or using yarn:
 yarn add @sapkotamadan/nrb-forex
 ```
 
+<hr />
+
 ### Live Exchange Rates
 
 Accessing realtime exchange rates is vital for many financial applications. With this package, you can effortlessly fetch live exchange rates by invoking the `liveRate()` function, you instantly receive current exchange rates for various currencies. This functionality is crucial for applications requiring dynamic currency conversion, such as e-commerce platforms, financial dashboards, and travel booking systems.
@@ -26,6 +28,8 @@ liveRate().then((data) => {
 });
 ```
 
+<hr />
+
 ### Exchange Rates for a Specific Date
 
 In certain scenarios, you may need to retrieve historical exchange rates for a specific date. This package provides a convenient solution for such requirements. Utilizing the `dateRate()` function, you can effortlessly obtain the exchange rate for any past date by specifying the desired date. This feature is invaluable for financial analysis, accounting applications, and historical data visualization, enabling users to track currency fluctuations over time accurately.
@@ -33,12 +37,67 @@ In certain scenarios, you may need to retrieve historical exchange rates for a s
 ```javascript
 import { dateRate } from '@sapkotamadan/nrb-forex';
 
-dateRate({ date: '2024-02-09', iso3: 'USD' }).then((data) => {
+dateRate({ date: '2024-02-09' }).then((data) => {
   console.log(data);
 }).catch((error) => {
   console.log(error);
 });
 ```
+
+The sample response for the `dateRate()` function is as follows:
+
+```json
+{
+  "date": "2024-02-09",
+  "published_on": "2024-02-09 00:00:11",
+  "modified_on": "2024-02-08 17:26:11",
+  "rates": [
+    {
+      "currency": {
+        "iso3": "USD",
+        "name": "U.S. Dollar",
+        "unit": 1
+      },
+      "buy": "132.44",
+      "sell": "133.04"
+    },
+    "..."
+  ]
+}
+```
+
+Optionally, you can also specify the currency code to retrieve the exchange rate for a specific currency on the given date. The following example demonstrates how to fetch the exchange rate for the Swiss Franc (CHF) on February 9, 2024:
+
+```javascript
+import { dateRate } from '@sapkotamadan/nrb-forex';
+
+dateRate({ date: '2024-02-09', currency: 'CHF' }).then((data) => {
+  console.log(data);
+}).catch((error) => {
+  console.log(error);
+});
+```
+
+The sample response for the `dateRate()` function with a specified currency is as follows:
+
+```json
+{
+  "date": "2024-02-09",
+  "published_on": "2024-02-09 00:00:11",
+  "modified_on": "2024-02-08 17:26:11",
+  "rate": {
+    "currency": {
+      "iso3": "CHF",
+      "name": "Swiss Franc",
+      "unit": 1
+    },
+    "buy": "151.48",
+    "sell": "152.17"
+  }
+}
+```
+
+<hr />
 
 ### Exchange Rate for a Date Range
 
@@ -76,6 +135,7 @@ The sample response for the `dateRangeRate()` function is as follows:
         "..."
       ]
     },
+    "...",
     {
       "date": "2024-02-09",
       "published_on": "2024-02-09 00:00:11",
