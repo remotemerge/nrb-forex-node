@@ -1,9 +1,9 @@
-import { test } from 'vitest';
-import assert from 'assert';
+import { test, assert } from 'vitest';
+import { DateRangeRate } from '../dist/types';
 import { dateRangeRate } from '../dist/nrb-forex.js';
 
 test('it contains multiple days records', async () => {
-  const res = await dateRangeRate({
+  const res = <DateRangeRate>await dateRangeRate({
     from: '2024-02-02',
     to: '2024-02-10',
     page: 1,
@@ -14,7 +14,7 @@ test('it contains multiple days records', async () => {
 });
 
 test('it contains a rate for KRW', async () => {
-  const res = await dateRangeRate({
+  const res = <DateRangeRate>await dateRangeRate({
     from: '2024-02-02',
     to: '2024-02-10',
     page: 1,
@@ -26,5 +26,5 @@ test('it contains a rate for KRW', async () => {
     (rate) => rate.currency.iso3 === 'KRW',
   );
 
-  assert.equal(koreanRate.currency.iso3, 'KRW');
+  assert.equal(koreanRate!.currency.iso3, 'KRW');
 });
