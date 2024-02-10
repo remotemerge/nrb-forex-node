@@ -23,5 +23,8 @@ export default defineConfig(({ mode }) => {
         },
       },
     },
+    test: {
+      pool: 'forks',
+    },
   };
 });
