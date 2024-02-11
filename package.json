@@ -1,6 +1,6 @@
 {
   "name": "@sapkotamadan/nrb-forex",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "This package simplifies the conversion of various currencies to Nepalese Rupees (NPR), utilizing data API from Nepal Rastra Bank (NRB).",
   "homepage": "https://github.com/remotemerge/nrb-forex-node",
   "license": "MIT",
