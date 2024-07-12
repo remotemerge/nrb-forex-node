@@ -18,6 +18,7 @@
   },
   "include": [
     "*.ts",
+    "__tests__/**/*.ts",
     "maker/*.ts",
     "src/**/*.ts"
   ],
