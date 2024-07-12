@@ -1,6 +1,6 @@
 {
   "name": "@sapkotamadan/nrb-forex",
-  "version": "1.0.1",
+  "version": "1.0.2",
   "description": "This package simplifies the conversion of various currencies to Nepalese Rupees (NPR), utilizing data API from Nepal Rastra Bank (NRB).",
   "homepage": "https://github.com/remotemerge/nrb-forex-node",
   "license": "MIT",
@@ -19,33 +19,32 @@
     "url": "https://github.com/remotemerge/nrb-forex-node/issues"
   },
   "engines": {
-    "node": ">=20.11 <21.0.0"
+    "node": ">=20.15 <21.0.0"
   },
   "prettier": {
     "singleQuote": true
   },
   "type": "module",
   "scripts": {
-    "lint": "eslint --ext .ts src",
-    "lint:fix": "eslint --ext .ts --fix src",
+    "lint": "eslint **/*.ts",
+    "lint:fix": "eslint **/*.ts --fix",
     "test": "vitest run",
     "dev": "vite",
     "preview": "vite preview",
     "build": "vite build && tsx maker/package-manager.ts"
   },
   "devDependencies": {
-    "@types/node": "^20.11.17",
-    "@typescript-eslint/eslint-plugin": "^6.21.0",
-    "@typescript-eslint/parser": "^6.21.0",
-    "eslint": "^8.56.0",
+    "@types/node": "^20.14.10",
+    "@typescript-eslint/eslint-plugin": "^7.16.0",
+    "@typescript-eslint/parser": "^7.16.0",
+    "eslint": "^8.57.0",
+    "eslint-config-prettier": "^9.1.0",
     "eslint-plugin-prettier": "^5.1.3",
-    "tsx": "^4.7.1",
-    "typescript": "^5.3.3",
-    "vite": "^5.1.1",
-    "vite-plugin-dts": "^3.7.2",
-    "vitest": "^1.2.2"
-  },
-  "optionalDependencies": {
-    "prettier": "^3.2.5"
+    "prettier": "^3.3.2",
+    "tsx": "^4.16.2",
+    "typescript": "^5.5.3",
+    "vite": "^5.3.3",
+    "vite-plugin-dts": "^3.9.1",
+    "vitest": "^2.0.2"
   }
 }
