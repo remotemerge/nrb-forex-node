@@ -37,10 +37,13 @@ const configs = {
   ],
   repository,
   bugs,
-  engines: { node: '>=18.0.0' },
-  types: 'index.d.ts',
+  types: 'src/index.d.ts',
   exports: {
-    '.': { require: './nrb-forex.cjs', import: './nrb-forex.js' },
+    '.': {
+      types: './src/index.d.ts',
+      require: './nrb-forex.cjs',
+      import: './nrb-forex.js',
+    },
   },
   scripts: {
     start: 'echo "Thanks for using the package 🎉🎉🎉"',
@@ -58,6 +61,5 @@ await writeFile(
 );
 
 // copy static files
-await copyFile('.npmrc', `${buildPath}/.npmrc`);
 await copyFile('README.md', `${buildPath}/README.md`);
 await copyFile('LICENSE', `${buildPath}/LICENSE`);

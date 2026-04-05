@@ -1,9 +1,10 @@
 # NRB Forex API
 
-[![Package](https://img.shields.io/npm/v/@sapkotamadan/nrb-forex?logo=npm)](https://www.npmjs.com/package/@sapkotamadan/nrb-forex)
-[![Downloads](https://img.shields.io/npm/dt/@sapkotamadan/nrb-forex)](https://www.npmjs.com/package/@sapkotamadan/nrb-forex)
-[![Build](https://img.shields.io/github/actions/workflow/status/remotemerge/nrb-forex-node/production.yml?logo=github)](https://github.com/remotemerge/nrb-forex-node)
-[![License](https://img.shields.io/npm/l/@sapkotamadan/nrb-forex)](https://github.com/remotemerge/nrb-forex-node)
+[![Package](https://img.shields.io/npm/v/@sapkotamadan/nrb-forex?logo=npm&logoColor=fff)](https://www.npmjs.com/package/@sapkotamadan/nrb-forex)
+[![Build](https://img.shields.io/github/actions/workflow/status/remotemerge/nrb-forex-node/testing.yml?logo=github-actions&logoColor=fff&label=build)](https://github.com/remotemerge/nrb-forex-node/actions/workflows/testing.yml)
+[![Tests](https://img.shields.io/github/actions/workflow/status/remotemerge/nrb-forex-node/testing.yml?logo=jest&logoColor=fff&label=tests)](https://github.com/remotemerge/nrb-forex-node/actions/workflows/testing.yml)
+[![Downloads](https://img.shields.io/npm/dt/@sapkotamadan/nrb-forex?logo=icloud&logoColor=fff)](https://www.npmjs.com/package/@sapkotamadan/nrb-forex)
+[![License](https://img.shields.io/github/license/remotemerge/nrb-forex-node?logo=opensourceinitiative&logoColor=fff)](https://github.com/remotemerge/nrb-forex-node)
 
 The **NRB Forex API** package provides a simple and intuitive interface for accessing exchange rates published by the Nepal Rastra Bank (NRB). It offers a range of functions to retrieve live exchange rates, historical exchange rates for a specific date, and exchange rates within a custom date range. This package is designed to facilitate seamless integration of NRB exchange rates into various financial applications, such as accounting software, e-commerce platforms, and financial dashboards.
 
@@ -38,11 +39,13 @@ Accessing realtime exchange rates is vital for many financial applications. With
 ```javascript
 import { liveRate } from '@sapkotamadan/nrb-forex';
 
-liveRate().then((data) => {
-  console.log(data);
-}).catch((error) => {
-  console.log(error);
-});
+liveRate()
+  .then((data) => {
+    console.log(data);
+  })
+  .catch((error) => {
+    console.log(error);
+  });
 ```
 
 The sample response for the `liveRate` function is as follows:
@@ -72,11 +75,13 @@ Optionally, you can also specify the currency code to retrieve the exchange rate
 ```javascript
 import { liveRate } from '@sapkotamadan/nrb-forex';
 
-liveRate({ iso3: 'EUR' }).then((data) => {
-  console.log(data);
-}).catch((error) => {
-  console.log(error);
-});
+liveRate({ iso3: 'EUR' })
+  .then((data) => {
+    console.log(data);
+  })
+  .catch((error) => {
+    console.log(error);
+  });
 ```
 
 The sample response for the `liveRate` function with a specified currency is as follows:
@@ -107,11 +112,13 @@ In certain scenarios, you may need to retrieve historical exchange rates for a s
 ```javascript
 import { dateRate } from '@sapkotamadan/nrb-forex';
 
-dateRate({ date: '2024-02-10' }).then((data) => {
-  console.log(data);
-}).catch((error) => {
-  console.log(error);
-});
+dateRate({ date: '2024-02-10' })
+  .then((data) => {
+    console.log(data);
+  })
+  .catch((error) => {
+    console.log(error);
+  });
 ```
 
 The sample response for the `dateRate` function is as follows:
@@ -141,11 +148,13 @@ Optionally, you can also specify the currency code to retrieve the exchange rate
 ```javascript
 import { dateRate } from '@sapkotamadan/nrb-forex';
 
-dateRate({ date: '2024-02-10', iso3: 'CHF' }).then((data) => {
-  console.log(data);
-}).catch((error) => {
-  console.log(error);
-});
+dateRate({ date: '2024-02-10', iso3: 'CHF' })
+  .then((data) => {
+    console.log(data);
+  })
+  .catch((error) => {
+    console.log(error);
+  });
 ```
 
 The sample response for the `dateRate` function with a specified currency is as follows:
@@ -176,11 +185,13 @@ For more comprehensive analysis or reporting purposes, you might need to gather 
 ```javascript
 import { dateRangeRate } from '@sapkotamadan/nrb-forex';
 
-dateRangeRate({ from: '2024-02-02', to: '2024-02-10', page: 1, perPage: 5 }).then((data) => {
-  console.log(data);
-}).catch((error) => {
-  console.log(error);
-});
+dateRangeRate({ from: '2024-02-02', to: '2024-02-10', page: 1, perPage: 5 })
+  .then((data) => {
+    console.log(data);
+  })
+  .catch((error) => {
+    console.log(error);
+  });
 ```
 
 The sample response for the `dateRangeRate` function is as follows:
