@@ -16,9 +16,7 @@ interface ApiBuySellInfo {
 }
 
 export interface ApiLiveRate
-  extends ApiDateInfo,
-    ApiCurrencyInfo,
-    ApiBuySellInfo {}
+  extends ApiDateInfo, ApiCurrencyInfo, ApiBuySellInfo {}
 
 export interface ApiDateRate {
   data: {

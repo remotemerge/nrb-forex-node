@@ -1,5 +1,5 @@
 import { apiUrl } from './config';
-import {
+import type {
   ApiDateRangeRate,
   ApiDateRate,
   ApiLiveRate,
