@@ -26,5 +26,8 @@ jobs:
       - name: 'Build project'
         run: bun run build
 
+      - name: 'Clone environment file'
+        run: cp .env.development .env
+
       - name: 'Run Tests'
         run: bun run test

@@ -26,6 +26,9 @@ jobs:
       - name: 'Install dependencies'
         run: bun install
 
+      - name: 'Clone environment file'
+        run: cp .env.production .env
+
       - name: 'Build project'
         run: bun run build
 
