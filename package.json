@@ -21,26 +21,19 @@
   "engines": {
     "node": ">=20.15 <21.0.0"
   },
-  "prettier": {
-    "singleQuote": true
-  },
   "type": "module",
   "scripts": {
-    "lint": "eslint **/*.ts",
-    "lint:fix": "eslint **/*.ts --fix",
+    "lint": "oxlint && oxfmt --check",
+    "lint:fix": "oxlint --fix && oxfmt",
     "test": "vitest run",
     "dev": "vite",
     "preview": "vite preview",
-    "build": "vite build && tsx maker/package-manager.ts"
+    "build": "vite build && tsx scripts/post-build.ts"
   },
   "devDependencies": {
     "@types/node": "^20.14.10",
-    "@typescript-eslint/eslint-plugin": "^7.16.0",
-    "@typescript-eslint/parser": "^7.16.0",
-    "eslint": "^8.57.0",
-    "eslint-config-prettier": "^9.1.0",
-    "eslint-plugin-prettier": "^5.1.3",
-    "prettier": "^3.3.2",
+    "oxfmt": "^0.2.0",
+    "oxlint": "^0.15.0",
     "tsx": "^4.16.2",
     "typescript": "^5.5.3",
     "vite": "^5.3.3",
