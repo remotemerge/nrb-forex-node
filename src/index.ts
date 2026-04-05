@@ -9,75 +9,89 @@ import type {
 
 const apiUrl = process.env.NRB_API_URL || '/api/forex/v1';
 
-// Set generic error message
 const apiError = 'The NRB API is not available or the request failed.';
 
 /**
- * @description Fetches live rates from the API
- * @param iso3 - Currency code like 'USD'
+ * Fetches the latest currency exchange rates from Nepal Rastra Bank.
+ *
+ * @param currencyCode - ISO 4217 currency code (e.g., 'USD', 'EUR'). If omitted, returns all available rates.
+ * @returns Exchange rate(s) with date and timestamp information.
+ * @throws Error if the API request fails.
  */
-const liveRate = async (iso3 = ''): Promise<StandardRate> => {
-  const res = await fetch(`${apiUrl}/app-rate`);
-  if (!res.ok) {
+const liveRate = async (currencyCode = ''): Promise<StandardRate> => {
+  const response = await fetch(`${apiUrl}/app-rate`);
+
+  if (!response.ok) {
     throw new Error(apiError);
   }
 
-  // Parsing the rate data from the response
-  const rateData = <ApiLiveRate[]>await res.json();
-  const [{ date, published_on, modified_on }] = rateData;
+  const apiResponse = <ApiLiveRate[]>await response.json();
+  const [{ date, published_on, modified_on }] = apiResponse;
 
-  // Formatting rates data
-  const rates = rateData.map(({ iso3, name, unit, buy, sell }) => {
+  const formattedRates = apiResponse.map(({ iso3, name, unit, buy, sell }) => {
     return { currency: { iso3, name, unit }, buy, sell };
   });
 
-  // Filtering rates based on the provided currency
-  if (iso3) {
-    const [rate] = rates.filter((rate) => {
-      return rate.currency.iso3.toUpperCase() === iso3.toUpperCase();
-    });
-    return { date, published_on, modified_on, rate };
+  if (currencyCode) {
+    const matchedRate = formattedRates.find(
+      (rate) => rate.currency.iso3.toUpperCase() === currencyCode.toUpperCase(),
+    );
+    return { date, published_on, modified_on, rate: matchedRate };
   }
-  return { date, published_on, modified_on, rates };
+
+  return { date, published_on, modified_on, rates: formattedRates };
 };
 
 /**
- * @description Fetches rates for a specific date from the API
- * @param date - Date to fetch rates in the format 'YYYY-MM-DD'
- * @param iso3 - Currency code like 'USD'
+ * Fetches currency exchange rates for a specific date from Nepal Rastra Bank.
+ *
+ * @param params - Query parameters for the date-specific rate lookup.
+ * @param params.date - Date in 'YYYY-MM-DD' format.
+ * @param params.iso3 - ISO 4217 currency code (e.g., 'USD', 'EUR'). If omitted, returns all rates for the date.
+ * @returns Exchange rate(s) for the specified date.
+ * @throws Error if the API request fails.
  */
 const dateRate = async ({
-  date: inputDate,
-  iso3 = '',
+  date,
+  iso3: currencyCode = '',
 }: {
   date: string;
   iso3?: string;
 }): Promise<StandardRate> => {
-  const res = await fetch(`${apiUrl}/rate?date=${inputDate}`);
-  if (!res.ok) {
+  const response = await fetch(`${apiUrl}/rate?date=${date}`);
+
+  if (!response.ok) {
     throw new Error(apiError);
   }
 
-  // Parsing the rate data from the response
-  const rateData = <ApiDateRate>await res.json();
-  const { date, published_on, modified_on, rates } = rateData.data.payload;
+  const apiResponse = <ApiDateRate>await response.json();
+  const {
+    date: rateDate,
+    published_on,
+    modified_on,
+    rates,
+  } = apiResponse.data.payload;
 
-  // Filtering rates based on the provided currency
-  if (iso3) {
-    const [rate] = rates.filter((rate) => {
-      return rate.currency.iso3.toUpperCase() === iso3.toUpperCase();
-    });
-    return { date, published_on, modified_on, rate };
+  if (currencyCode) {
+    const matchedRate = rates.find(
+      (rate) => rate.currency.iso3.toUpperCase() === currencyCode.toUpperCase(),
+    );
+    return { date: rateDate, published_on, modified_on, rate: matchedRate };
   }
-  return { date, published_on, modified_on, rates };
+
+  return { date: rateDate, published_on, modified_on, rates };
 };
 
 /**
- * @description Fetches rates for a date range from the API
- * @param from - Start date in the format 'YYYY-MM-DD'
- * @param to - End date in the format 'YYYY-MM-DD'
- * @param page - Current page number
- * @param perPage - Number of items per page
+ * Fetches currency exchange rates for a date range from Nepal Rastra Bank.
+ *
+ * @param params - Query parameters for the date range lookup.
+ * @param params.from - Start date in 'YYYY-MM-DD' format.
+ * @param params.to - End date in 'YYYY-MM-DD' format.
+ * @param params.page - Page number for paginated results (default: 1).
+ * @param params.perPage - Number of records per page (default: 10).
+ * @returns Paginated list of exchange rates for the specified date range.
+ * @throws Error if the API request fails.
  */
 const dateRangeRate = async ({
   from,
@@ -85,16 +99,16 @@ const dateRangeRate = async ({
   page = 1,
   perPage = 10,
 }: RangeQuery): Promise<DateRangeRate> => {
-  const params = `from=${from}&to=${to}&page=${page}&per_page=${perPage}`;
-  const res = await fetch(`${apiUrl}/rates?${params}`);
-  if (!res.ok) {
+  const queryParams = `from=${from}&to=${to}&page=${page}&per_page=${perPage}`;
+  const response = await fetch(`${apiUrl}/rates?${queryParams}`);
+
+  if (!response.ok) {
     throw new Error(apiError);
   }
 
-  // Parsing the rate data from the response
-  const resData = <ApiDateRangeRate>await res.json();
-  const { pages } = resData.pagination;
-  const { payload } = resData.data;
+  const apiResponse = <ApiDateRangeRate>await response.json();
+  const { pages } = apiResponse.pagination;
+  const { payload } = apiResponse.data;
 
   return { payload, pagination: { page, total: pages } };
 };
