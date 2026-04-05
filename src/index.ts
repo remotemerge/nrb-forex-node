@@ -1,4 +1,3 @@
-import { apiUrl } from './config';
 import type {
   ApiDateRangeRate,
   ApiDateRate,
@@ -7,6 +6,8 @@ import type {
   RangeQuery,
   StandardRate,
 } from './types';
+
+const apiUrl = process.env.NRB_API_URL || '/api/forex/v1';
 
 // Set generic error message
 const apiError = 'The NRB API is not available or the request failed.';
