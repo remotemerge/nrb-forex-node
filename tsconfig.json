@@ -1,30 +1,23 @@
 {
   "compilerOptions": {
-    "target": "ESNext",
-    "module": "ESNext",
-    "moduleResolution": "Node",
-    "noEmit": true,
+    // Module and Output
+    "outDir": "./dist",
+    "rootDir": "./",
+    "removeComments": true,
+    "incremental": true,
+
+    // Type Resolution
+    "types": ["node"],
+    "moduleResolution": "bundler",
+    "forceConsistentCasingInFileNames": true,
+
+    // Strict Type Checking
     "strict": true,
-    "noImplicitAny": true,
-    "isolatedModules": true,
-    "skipLibCheck": true,
-    "types": [
-      "vite/client",
-      "dist/index.d.ts",
-    ],
-    "typeRoots": [
-      "node_modules/@types"
-    ]
+    "noFallthroughCasesInSwitch": true,
+
+    // Performance
+    "skipLibCheck": true
   },
-  "include": [
-    "*.ts",
-    "__tests__/**/*.ts",
-    "maker/*.ts",
-    "src/**/*.ts"
-  ],
-  "exclude": [
-    "dist",
-    "node_modules",
-    "test"
-  ]
+  "include": ["*.ts", "__tests__/**/*.ts", "scripts/*.ts", "src/**/*.ts"],
+  "exclude": ["node_modules", "dist"]
 }
