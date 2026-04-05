@@ -37,9 +37,13 @@ const configs = {
   ],
   repository,
   bugs,
-  types: 'index.d.ts',
+  types: 'src/index.d.ts',
   exports: {
-    '.': { require: './nrb-forex.cjs', import: './nrb-forex.js' },
+    '.': {
+      types: './src/index.d.ts',
+      require: './nrb-forex.cjs',
+      import: './nrb-forex.js',
+    },
   },
   scripts: {
     start: 'echo "Thanks for using the package 🎉🎉🎉"',
