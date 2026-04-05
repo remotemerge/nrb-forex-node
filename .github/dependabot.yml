@@ -3,15 +3,14 @@
 
 version: 2
 updates:
-
-  - package-ecosystem: "github-actions"
-    directory: "/.github/workflows/"
+  - package-ecosystem: 'github-actions'
+    directory: '/.github/workflows/'
     schedule:
-      interval: "weekly"
-      day: "saturday"
+      interval: 'weekly'
+      day: 'saturday'
 
-  - package-ecosystem: "bun"
-    directory: "/"
+  - package-ecosystem: 'bun'
+    directory: '/'
     schedule:
-      interval: "weekly"
-      day: "saturday"
+      interval: 'weekly'
+      day: 'saturday'

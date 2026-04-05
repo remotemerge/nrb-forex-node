@@ -1,10 +1,10 @@
 # The workflow to install the package
-name: "Install"
+name: 'Install'
 
 # Controls when the workflow will run
 on:
   workflow_run:
-    workflows: [ "Publish" ]
+    workflows: ['Publish']
     types:
       - completed
 
@@ -13,81 +13,81 @@ jobs:
     runs-on: ${{ matrix.os }}
     strategy:
       matrix:
-        os: [ ubuntu-latest, windows-latest, macos-latest ]
-        node-version: [ 20, 22, 24 ]
+        os: [ubuntu-latest, windows-latest, macos-latest]
+        node-version: [20, 22, 24]
       fail-fast: false
 
     steps:
-      - name: "Set up Node.js"
+      - name: 'Set up Node.js'
         uses: actions/setup-node@v6
         with:
           node-version: ${{ matrix.node-version }}
 
-      - name: "Install NRB Forex API"
+      - name: 'Install NRB Forex API'
         run: npm init -y && npm install @sapkotamadan/nrb-forex
 
-      - name: "List installed packages"
+      - name: 'List installed packages'
         run: npm list --depth=0
 
   install-yarn:
     runs-on: ${{ matrix.os }}
     strategy:
       matrix:
-        os: [ ubuntu-latest, macos-latest ]
-        node-version: [ 20, 22, 24 ]
+        os: [ubuntu-latest, macos-latest]
+        node-version: [20, 22, 24]
       fail-fast: false
 
     steps:
-      - name: "Set up Node.js"
+      - name: 'Set up Node.js'
         uses: actions/setup-node@v6
         with:
           node-version: ${{ matrix.node-version }}
 
-      - name: "Install NRB Forex API"
+      - name: 'Install NRB Forex API'
         run: npm init -y && yarn add @sapkotamadan/nrb-forex
 
-      - name: "List installed packages"
+      - name: 'List installed packages'
         run: yarn list --depth=0
 
   install-pnpm:
     runs-on: ${{ matrix.os }}
     strategy:
       matrix:
-        os: [ ubuntu-latest, windows-latest, macos-latest ]
-        node-version: [ 20, 22, 24 ]
+        os: [ubuntu-latest, windows-latest, macos-latest]
+        node-version: [20, 22, 24]
       fail-fast: false
 
     steps:
-      - name: "Set up Node.js"
+      - name: 'Set up Node.js'
         uses: actions/setup-node@v6
         with:
           node-version: ${{ matrix.node-version }}
 
-      - name: "Install pnpm"
+      - name: 'Install pnpm'
         run: npm install -g pnpm
 
-      - name: "Install NRB Forex API"
+      - name: 'Install NRB Forex API'
         run: pnpm init && pnpm add @sapkotamadan/nrb-forex
 
-      - name: "List installed packages"
+      - name: 'List installed packages'
         run: pnpm list --depth=0
 
   install-bun:
     runs-on: ${{ matrix.os }}
     strategy:
       matrix:
-        os: [ ubuntu-latest, windows-latest, macos-latest ]
+        os: [ubuntu-latest, windows-latest, macos-latest]
       fail-fast: false
 
     steps:
-      - name: "Set up Bun"
+      - name: 'Set up Bun'
         uses: oven-sh/setup-bun@v2
 
-      - name: "Generate package.json file"
+      - name: 'Generate package.json file'
         run: bun init -y
 
-      - name: "Install NRB Forex API"
+      - name: 'Install NRB Forex API'
         run: bun add @sapkotamadan/nrb-forex
 
-      - name: "List installed packages"
+      - name: 'List installed packages'
         run: bun pm ls
