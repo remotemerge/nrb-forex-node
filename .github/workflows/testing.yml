@@ -1,8 +1,8 @@
 # The workflow to run the tests
-name: Test
+name: "Test"
 
 # Trigger the workflow on pull requests
-on: [pull_request]
+on: [ pull_request ]
 
 jobs:
   test:
@@ -10,7 +10,7 @@ jobs:
     runs-on: ${{ matrix.os }}
     strategy:
       matrix:
-        os: [ubuntu-24.04, windows-latest, macos-latest]
+        os: [ ubuntu-24.04, windows-latest, macos-latest ]
       fail-fast: false
 
     steps:
