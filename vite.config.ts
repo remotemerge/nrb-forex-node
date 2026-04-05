@@ -12,7 +12,7 @@ export default defineConfig(({ mode }) => {
         entry: 'src/index.ts',
         formats: ['cjs', 'es'],
       },
-      sourcemap: true,
+      sourcemap: false,
     },
     server: {
       proxy: {
