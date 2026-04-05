@@ -5,19 +5,27 @@
     "rootDir": "./",
     "removeComments": true,
     "incremental": true,
-
     // Type Resolution
-    "types": ["node"],
+    "types": [
+      "node",
+      "bun-types"
+    ],
     "moduleResolution": "bundler",
     "forceConsistentCasingInFileNames": true,
-
     // Strict Type Checking
     "strict": true,
     "noFallthroughCasesInSwitch": true,
-
     // Performance
     "skipLibCheck": true
   },
-  "include": ["*.ts", "__tests__/**/*.ts", "scripts/*.ts", "src/**/*.ts"],
-  "exclude": ["node_modules", "dist"]
+  "include": [
+    "*.ts",
+    "__tests__/**/*.ts",
+    "scripts/*.ts",
+    "src/**/*.ts"
+  ],
+  "exclude": [
+    "node_modules",
+    "dist"
+  ]
 }
